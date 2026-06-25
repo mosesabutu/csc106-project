@@ -53,7 +53,7 @@ function injectFooter() {
       <ul class="footer-links">
         <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">[GitHub]</a></li>
         <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">[LinkedIn]</a></li>
-        <li><a href="mailto:student@miva.edu.ng" class="footer-link">[Email]</a></li>
+        <li><a href="mailto:miva@miva.edu.ng" class="footer-link">[Email]</a></li>
       </ul>
     </div>
   `;
