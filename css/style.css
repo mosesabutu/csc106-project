@@ -1,0 +1,596 @@
+/* ==========================================================================
+   01. DESIGN SYSTEM, VARIABLES & INTEGRATION
+   ========================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap");
+
+:root {
+  --bg-primary: #0a0a0a; /* Deepest matte ink black */
+  --bg-secondary: #121212; /* Mid-tone surface black */
+  --border-color: #262626; /* Subdued charcoal structural dividing line */
+
+  --accent-primary: #ffffff; /* Pure crisp white for focused/active states */
+  --accent-dim: #404040; /* Mid-tone gray for muted interactive shifts */
+  --text-main: #f5f5f5; /* High-readability bone white */
+  --text-muted: #737373; /* Dim tracking text gray */
+
+  --error: #ef4444;
+  --success: #22c55e;
+
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  --font-sans: "JetBrains Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  animation: surfaceReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-fallback-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.navbar {
+  background-color: rgba(18, 18, 18, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1.2rem 2rem;
+  transition: var(--transition-smooth);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition-fast);
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent-primary);
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--accent-primary);
+  transition: var(--transition-smooth);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.menu-toggle span {
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-main);
+  transition: var(--transition-smooth);
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.8rem;
+  flex: 1 1 calc(33.333% - 1.5rem);
+  min-width: 290px;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.card:hover {
+  border-color: var(--accent-dim);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Data Matrix Semantic Tables */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  background-color: var(--bg-secondary);
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+th {
+  background-color: #121212;
+  color: var(--text-main);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid var(--border-color);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  color: var(--accent-primary);
+  background-color: #171717;
+  transition: var(--transition-fast);
+}
+
+.skills-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.skills-list li {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 1.1rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.skills-list li:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background-color: var(--bg-primary);
+}
+
+.media-wrapper {
+  margin-top: 2rem;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  background: #000;
+  transition: var(--transition-smooth);
+}
+
+.media-wrapper:hover {
+  border-color: var(--accent-dim);
+}
+
+video {
+  width: 100%;
+  display: block;
+  mix-blend-mode: luminosity;
+  transition: var(--transition-smooth);
+}
+
+video:hover {
+  mix-blend-mode: normal;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.9rem;
+  background: #121212;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 1px var(--accent-primary);
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  background: var(--text-main) !important;
+  color: var(--bg-primary) !important;
+  border: 1px solid var(--text-main);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+button[type="submit"]:hover {
+  background: transparent !important;
+  color: var(--text-main) !important;
+  border-color: var(--accent-dim);
+}
+
+@keyframes surfaceReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-in {
+  animation: surfaceReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 0;
+    gap: 2rem;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    opacity: 0;
+    transform: translateY(-15px);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+  }
+
+  .nav-menu.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 3rem 0;
+}
+
+.hero-text-block {
+  flex: 1 1 60%;
+}
+
+.hero-avatar-block {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-image-container {
+  width: 25rem;
+  height: 25rem;
+  border-radius: 8px;
+  /* border: 1px solid var(--border-color) */
+  overflow: hidden;
+  background: var(--bg-secondary);
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.profile-image-container:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.profile-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.profile-image-container:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.2);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #171717;
+  border: 1px solid var(--border-color);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--success);
+}
+
+.welcome-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+}
+
+.hero-lead {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-bio {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.quick-directory {
+  margin-top: 3.5rem;
+}
+
+.directory-header {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.card-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.card-title {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.card-desc {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.card-link {
+  font-size: 0.85rem;
+  display: inline-block;
+}
+
+@media (max-width: 968px) {
+  .hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+  .profile-image-container {
+    width: 20rem;
+    height: 20rem;
+  }
+  .welcome-title {
+    font-size: 2.2rem;
+  }
+  .status-badge {
+    justify-content: center;
+  }
+}
+/* ==========================================================================
+   11. STEALTH SYSTEM FOOTER INTERFACE
+   ========================================================================== */
+.footer {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  margin-top: auto; /* Guarantees sticky behavior at page baseline */
+  transition: var(--transition-smooth);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0.8rem;
+  letter-spacing: -0.01em;
+}
+
+.footer-meta {
+  color: var(--text-muted);
+}
+
+.footer-meta-identity {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.footer-link:hover {
+  color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   12. FOOTER RESPONSIVE INTERFACES
+   ========================================================================== */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 1.2rem;
+  }
+}
+/* ==========================================================================
+   13. MOBILE NAV OVERLAY & SCROLL LOCK
+   ========================================================================== */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65); /* Stealth dim overlay mask */
+  backdrop-filter: blur(4px); /* Soft structural focus shifts */
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 999; /* Sits right below the elevated navbar layer */
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+/* Open System State */
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Lock viewport interaction loops completely */
+body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ==========================================================================
+   14. Z-INDEX CORRECTION OVERRIDES FOR RESPONSIVE LAYER MATRIX
+   ========================================================================== */
+@media (max-width: 768px) {
+  .navbar {
+    z-index: 1001; /* Forces the header structure above the fullscreen dim block */
+  }
+
+  .nav-menu {
+    z-index: 1002; /* Ensures dropdown navigation layers sit at the top of the stack */
+  }
+}

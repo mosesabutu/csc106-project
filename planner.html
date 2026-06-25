@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Academic Ecosystem | Planner</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="main-content">
+      <h2 style="margin-bottom: 2rem">Task Automation System</h2>
+
+      <form
+        id="planner-form"
+        style="display: flex; gap: 1rem; margin-bottom: 2rem"
+      >
+        <input
+          type="text"
+          id="task-input"
+          placeholder="Configure objective parameters..."
+          style="
+            flex: 1;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #334155;
+            background: var(--bg-secondary);
+            color: white;
+          "
+        />
+        <button
+          type="submit"
+          style="
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 0 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 20rem;
+          "
+        >
+          Commit
+        </button>
+      </form>
+
+      <ul id="task-list" style="list-style: none"></ul>
+    </main>
+
+    <script src="js/main.js" type="module"></script>
+    <script src="js/planner.js" type="module"></script>
+  </body>
+</html>
