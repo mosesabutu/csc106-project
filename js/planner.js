@@ -82,27 +82,33 @@ class AcademicPlanner {
     }
 
     this.tasks.forEach((task) => {
+      const priority = task.priority || "normal";
+      // Map priority to CSS class
+      const priorityClass = `priority-${priority}`;
+
       const li = document.createElement("li");
       li.className = `card task-item ${task.completed ? "completed" : ""}`;
 
       li.innerHTML = `
-        <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-             <div style="display: flex; align-items: center; gap: 1rem;">
-                <input type="checkbox" style class="task-checkbox" ${task.completed ? "checked" : ""}>
-                <span style="${task.completed ? "text-decoration: line-through;" : ""} font-weight: bold;">${task.text}</span>
-             </div>
-             <span style="font-size: 0.6rem; padding: 2px 6px; border: 1px solid var(--accent-primary); color: var(--accent-primary);">
-                ${task.priority.toUpperCase()}
-             </span>
-          </div>
-          <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">${task.description}</p>
-          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 5px;">
-            <span>Due: ${task.deadline}</span>
-            <button class="delete-btn" style="background: none; border: none; color: #ef4444; cursor: pointer;">Delete</button>
-          </div>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+           <div style="display: flex; align-items: center; gap: 1rem;">
+              <input type="checkbox" class="task-checkbox" ${task.completed ? "checked" : ""}>
+              <span style="${task.completed ? "text-decoration: line-through; color: #64748b;" : ""} font-weight: bold;">
+                ${task.text}
+              </span>
+           </div>
+           <span class="${priorityClass}" style="font-size: 0.6rem; padding: 2px 6px; border: 1px solid; border-radius: 4px;">
+              ${priority.toUpperCase()}
+           </span>
         </div>
-      `;
+        <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">${task.description}</p>
+        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+          <span>Due: ${task.deadline}</span>
+          <button class="delete-btn" style="background: none; border: none; color: #ef4444; cursor: pointer;">Delete</button>
+        </div>
+      </div>
+    `;
 
       li.querySelector(".task-checkbox").addEventListener("click", () =>
         this.toggleTask(task.id),
