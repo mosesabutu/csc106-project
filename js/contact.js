@@ -56,7 +56,7 @@ class FormValidator {
 
     if (!hasErrors) {
       alert(
-        "Security clearance processing complete. Payload synchronized successfully.",
+        "Security clearance processing complete. Secure handshake established successfully.",
       );
       this.form.reset();
       Object.values(this.inputs).forEach((el) => (el.style.borderColor = ""));
