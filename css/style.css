@@ -1,17 +1,14 @@
-/* ==========================================================================
-   01. DESIGN SYSTEM, VARIABLES & INTEGRATION
-   ========================================================================== */
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap");
 
 :root {
-  --bg-primary: #0a0a0a; /* Deepest matte ink black */
-  --bg-secondary: #121212; /* Mid-tone surface black */
-  --border-color: #262626; /* Subdued charcoal structural dividing line */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --border-color: #262626;
 
-  --accent-primary: #ffffff; /* Pure crisp white for focused/active states */
-  --accent-dim: #404040; /* Mid-tone gray for muted interactive shifts */
-  --text-main: #f5f5f5; /* High-readability bone white */
-  --text-muted: #737373; /* Dim tracking text gray */
+  --accent-primary: #ffffff;
+  --accent-dim: #404040;
+  --text-main: #f5f5f5;
+  --text-muted: #737373;
 
   --error: #ef4444;
   --success: #22c55e;
@@ -171,7 +168,6 @@ body {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
 }
 
-/* Data Matrix Semantic Tables */
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -296,8 +292,13 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: transparent !important;
+  background: var(--success) !important;
   color: var(--text-main) !important;
+  border-color: var(--accent-dim);
+}
+button[type="submit"]:active {
+  background: #63ff9c !important;
+  color: var(--bg-primary) !important;
   border-color: var(--accent-dim);
 }
 
@@ -370,7 +371,6 @@ button[type="submit"]:hover {
   width: 25rem;
   height: 25rem;
   border-radius: 8px;
-  /* border: 1px solid var(--border-color) */
   overflow: hidden;
   background: var(--bg-secondary);
   transition: var(--transition-smooth);
@@ -491,14 +491,12 @@ button[type="submit"]:hover {
     justify-content: center;
   }
 }
-/* ==========================================================================
-   11. STEALTH SYSTEM FOOTER INTERFACE
-   ========================================================================== */
+
 .footer {
   background-color: var(--bg-secondary);
   border-top: 1px solid var(--border-color);
   padding: 1.5rem 2rem;
-  margin-top: auto; /* Guarantees sticky behavior at page baseline */
+  margin-top: auto;
   transition: var(--transition-smooth);
 }
 
@@ -537,9 +535,6 @@ button[type="submit"]:hover {
   color: var(--accent-primary);
 }
 
-/* ==========================================================================
-   12. FOOTER RESPONSIVE INTERFACES
-   ========================================================================== */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -552,9 +547,7 @@ button[type="submit"]:hover {
     gap: 1.2rem;
   }
 }
-/* ==========================================================================
-   13. MOBILE NAV OVERLAY & SCROLL LOCK
-   ========================================================================== */
+
 .nav-overlay {
   position: fixed;
   top: 0;
@@ -570,27 +563,22 @@ button[type="submit"]:hover {
   transition: var(--transition-smooth);
 }
 
-/* Open System State */
 .nav-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Lock viewport interaction loops completely */
 body.no-scroll {
   overflow: hidden;
   height: 100vh;
 }
 
-/* ==========================================================================
-   14. Z-INDEX CORRECTION OVERRIDES FOR RESPONSIVE LAYER MATRIX
-   ========================================================================== */
 @media (max-width: 768px) {
   .navbar {
-    z-index: 1001; /* Forces the header structure above the fullscreen dim block */
+    z-index: 1001;
   }
 
   .nav-menu {
-    z-index: 1002; /* Ensures dropdown navigation layers sit at the top of the stack */
+    z-index: 1002;
   }
 }
