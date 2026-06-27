@@ -224,7 +224,7 @@ tr:hover td {
   padding: 0.4rem 1.1rem;
   border-radius: 4px;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--success);
   transition: var(--transition-fast);
 }
 
@@ -280,7 +280,7 @@ button[type="submit"] {
   width: 100%;
   padding: 1rem;
   background: var(--success) !important;
-  color: var(--text-main) !important;
+  color: var(--bg-secondary) !important;
   border: 1px solid var(--text-main);
   border-radius: 4px;
   font-family: var(--font-sans);
@@ -470,7 +470,13 @@ button[type="submit"]:active {
   font-size: 0.75rem;
   color: var(--text-muted);
 }
-
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
 .card-title {
   margin: 0.5rem 0;
   font-size: 1.1rem;
@@ -485,6 +491,34 @@ button[type="submit"]:active {
 .card-link {
   font-size: 0.85rem;
   display: inline-block;
+  color: var(--success);
+}
+
+/* Layout and Base Visuals */
+.access-nodes {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+
+.node-wrapper {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* The SVG element itself */
+.node-icon {
+  width: 24px;
+  height: 24px;
+  fill: var(--success); /* Initial stealth slate-gray */
+  transition: fill 0.3s ease;
+}
+
+/* Interaction: System Online */
+.node-wrapper:hover .node-icon {
+  fill: var(--accent-primary); /* Vibrant green accent */
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.5));
 }
 
 @media (max-width: 968px) {

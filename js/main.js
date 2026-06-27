@@ -13,7 +13,7 @@ function injectNavbar() {
 
   header.innerHTML = `
     <div class="nav-container">
-      <a href="index.html" class="nav-brand">MOSES.OS</a>
+      <a href="index.html" class="nav-brand">MOSES<span style="color: var(--primary);">.OS</span></a>
       <button class="menu-toggle" aria-label="Toggle Menu">
         <span></span>
         <span></span>
@@ -48,12 +48,12 @@ function injectFooter() {
       <div class="footer-meta">
         <span>&copy; 2026 </span>
         <span class="footer-meta-identity">Moses</span>
-        <span> // Miva Open University // COS 106 Project</span>
+        <span> || Miva Open University || COS 106 Project</span>
       </div>
       <ul class="footer-links">
-        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-link">[GitHub]</a></li>
+        <li><a href="https://github.com/mosesabutu/csc106-project" target="_blank" rel="noopener noreferrer" class="footer-link">[GitHub]</a></li>
         <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">[LinkedIn]</a></li>
-        <li><a href="mailto:miva@miva.edu.ng" class="footer-link">[Email]</a></li>
+        <li><a href="mailto:m.abutu3785@miva.edu.ng" class="footer-link">[Email]</a></li>
       </ul>
     </div>
   `;
