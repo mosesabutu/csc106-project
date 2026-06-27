@@ -2,14 +2,36 @@ class AcademicPlanner {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem("academic_tasks")) || [];
     this.form = document.getElementById("planner-form");
+
+    // Form Inputs
     this.input = document.getElementById("task-input");
+    this.desc = document.getElementById("task-desc");
+    this.deadline = document.getElementById("task-deadline");
+    this.priority = document.getElementById("task-priority");
+
+    // UI Elements
     this.taskList = document.getElementById("task-list");
+    this.modal = document.getElementById("task-modal");
+    this.openBtn = document.getElementById("open-modal-btn");
+    this.closeBtn = document.getElementById("close-modal-btn");
 
     this.init();
   }
 
   init() {
+    // Modal Event Listeners
+    this.openBtn.addEventListener(
+      "click",
+      () => (this.modal.style.display = "block"),
+    );
+    this.closeBtn.addEventListener(
+      "click",
+      () => (this.modal.style.display = "none"),
+    );
+
+    // Form Submission
     this.form.addEventListener("submit", (e) => this.addTask(e));
+
     this.render();
   }
 
@@ -26,12 +48,16 @@ class AcademicPlanner {
     const newTask = {
       id: crypto.randomUUID(),
       text: taskText,
+      description: this.desc.value.trim() || "No description provided.",
+      deadline: this.deadline.value || "No deadline",
+      priority: this.priority.value || "normal",
       completed: false,
       timestamp: new Date().toLocaleDateString(),
     };
 
     this.tasks.push(newTask);
-    this.input.value = "";
+    this.form.reset();
+    this.modal.style.display = "none"; // Close modal after success
     this.save();
   }
 
@@ -51,27 +77,33 @@ class AcademicPlanner {
     this.taskList.innerHTML = "";
 
     if (this.tasks.length === 0) {
-      this.taskList.innerHTML = `<p style="color: var(--text-muted)">No academic objectives listed. Add tasks above.</p>`;
+      this.taskList.innerHTML = `<p style="color: var(--text-muted); text-align: center;">No academic objectives listed. Initialize above.</p>`;
       return;
     }
 
     this.tasks.forEach((task) => {
       const li = document.createElement("li");
       li.className = `card task-item ${task.completed ? "completed" : ""}`;
-      li.style.display = "flex";
-      li.style.justifyContent = "space-between";
-      li.style.alignItems = "center";
-      li.style.marginBottom = "1rem";
 
       li.innerHTML = `
-        <div style="display: flex; align-items: center; gap: 1rem;">
-          <input style="width: 1.2rem; height: 1.2rem; background: var(--success); appearance: none; -webkit-appearance: none; border: 1px solid var(--border); cursor: pointer;" type="checkbox" ${task.completed ? "checked" : ""} class="task-checkbox"></input>
-          <span style="${task.completed ? "text-decoration: line-through; color: var(--text-muted);" : ""}" class="task-checkbox">${task.text}</span>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+             <div style="display: flex; align-items: center; gap: 1rem;">
+                <input type="checkbox" style class="task-checkbox" ${task.completed ? "checked" : ""}>
+                <span style="${task.completed ? "text-decoration: line-through;" : ""} font-weight: bold;">${task.text}</span>
+             </div>
+             <span style="font-size: 0.6rem; padding: 2px 6px; border: 1px solid var(--accent-primary); color: var(--accent-primary);">
+                ${task.priority.toUpperCase()}
+             </span>
+          </div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;">${task.description}</p>
+          <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #64748b; margin-top: 5px;">
+            <span>Due: ${task.deadline}</span>
+            <button class="delete-btn" style="background: none; border: none; color: #ef4444; cursor: pointer;">Delete</button>
+          </div>
         </div>
-        <button class="delete-btn" style="background: none; border: none; color: var(--error); cursor: pointer;">Delete</button>
       `;
 
-      // Event Hooking
       li.querySelector(".task-checkbox").addEventListener("click", () =>
         this.toggleTask(task.id),
       );

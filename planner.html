@@ -5,54 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Academic Ecosystem | Planner</title>
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      /* Main System Styles */
+      #task-list {
+        list-style: none;
+        padding: 0;
+        max-width: 600px;
+        margin: 2rem auto;
+      }
+
+      /* Trigger Button Style */
+      .trigger-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        text-align: center;
+      }
+      .commit-btn {
+        background: #22c55e;
+        color: var(--bg-primary);
+        padding: 1rem;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      /* Modal System Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+      }
+      .modal-content {
+        background: var(--bg-secondary);
+        padding: 2rem;
+        margin: 10% auto;
+        max-width: 500px;
+        border-radius: 12px;
+        border: 1px solid var(--accent-primary);
+      }
+      #planner-form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .planner-input {
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #000;
+        color: white;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      /* Custom rounded monochrome checkbox */
+      .task-checkbox {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 1.2rem;
+        height: 1.2rem;
+        border: 1px solid #334155; /* Dark border */
+        border-radius: 50%; /* Makes it circular */
+        background: var(--bg-primary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+      }
+
+      /* Checked state: filled with your accent green */
+      .task-checkbox:checked {
+        background: #22c55e;
+        border-color: #22c55e;
+      }
+
+      /* Optional: add a small visual indicator inside the circle */
+      .task-checkbox:checked::after {
+        content: "";
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: var(--bg-primary);
+      }
+    </style>
   </head>
   <body>
     <main class="main-content">
-      <h2 style="margin-bottom: 2rem">Task Automation System</h2>
+      <h2 style="text-align: center; margin-top: 2rem">
+        Task Automation System
+      </h2>
 
-      <form
-        id="planner-form"
-        style="
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1rem;
-          margin-bottom: 2rem;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <input
-          type="text"
-          id="task-input"
-          placeholder="Configure objective parameters..."
-          style="
-            flex: 1;
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            background: var(--bg-secondary);
-            color: white;
-          "
-        />
-        <button
-          type="submit"
-          style="
-            background: #22c55e;
-            color: var(--bg-primary);
-            padding: 0 1.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 25rem;
-            height: 3rem;
-          "
-        >
-          Commit
+      <div class="trigger-container">
+        <button id="open-modal-btn" class="commit-btn">
+          INITIALIZE NEW OBJECTIVE
         </button>
-      </form>
+      </div>
 
-      <ul id="task-list" style="list-style: none"></ul>
+      <div id="task-modal" class="modal">
+        <div class="modal-content">
+          <form id="planner-form">
+            <input
+              type="text"
+              id="task-input"
+              class="planner-input"
+              placeholder="Task objective..."
+              required
+            />
+            <input
+              type="text"
+              id="task-desc"
+              class="planner-input"
+              placeholder="Description..."
+            />
+            <input type="date" id="task-deadline" class="planner-input" />
+            <select id="task-priority" class="planner-input">
+              <option value="low">Low Priority</option>
+              <option value="normal" selected>Normal Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+            <button type="submit" class="commit-btn">COMMIT</button>
+            <button
+              type="button"
+              id="close-modal-btn"
+              style="
+                background: none;
+                border: none;
+                color: #666;
+                cursor: pointer;
+                margin-top: 1rem;
+                width: 100%;
+              "
+            >
+              CANCEL
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <ul id="task-list"></ul>
     </main>
 
     <script src="js/main.js" type="module"></script>
