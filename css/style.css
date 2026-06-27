@@ -425,6 +425,20 @@ button[type="submit"]:active {
   margin-bottom: 1.5rem;
   color: var(--accent-primary);
 }
+.loading-dots::after {
+  content: "|"; /* A command-line style cursor */
+  animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
 
 .hero-lead {
   color: var(--text-muted);
