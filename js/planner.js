@@ -65,14 +65,14 @@ class AcademicPlanner {
 
       li.innerHTML = `
         <div style="display: flex; align-items: center; gap: 1rem;">
-          <input type="checkbox" ${task.completed ? "checked" : ""} class="task-checkbox">
-          <span style="${task.completed ? "text-decoration: line-through; color: var(--text-muted);" : ""}">${task.text}</span>
+          <input style="width: 1.2rem; height: 1.2rem; background: var(--success); appearance: none; -webkit-appearance: none; border: 1px solid var(--border); cursor: pointer;" type="checkbox" ${task.completed ? "checked" : ""} class="task-checkbox"></input>
+          <span style="${task.completed ? "text-decoration: line-through; color: var(--text-muted);" : ""}" class="task-checkbox">${task.text}</span>
         </div>
         <button class="delete-btn" style="background: none; border: none; color: var(--error); cursor: pointer;">Delete</button>
       `;
 
       // Event Hooking
-      li.querySelector(".task-checkbox").addEventListener("change", () =>
+      li.querySelector(".task-checkbox").addEventListener("click", () =>
         this.toggleTask(task.id),
       );
       li.querySelector(".delete-btn").addEventListener("click", () =>
