@@ -85,6 +85,9 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
+  span {
+   color: var(--success); !important
+  }
 }
 
 .nav-menu {
