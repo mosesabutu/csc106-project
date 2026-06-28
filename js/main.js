@@ -13,7 +13,7 @@ function injectNavbar() {
 
   header.innerHTML = `
     <div class="nav-container">
-      <a href="/" class="nav-brand">MOSES<span>.OS</span></a>
+      <a href="/" class="nav-brand">MOSES<span>.</span>OS</a>
       <button class="menu-toggle" aria-label="Toggle Menu">
         <span></span>
         <span></span>
