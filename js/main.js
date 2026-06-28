@@ -13,18 +13,18 @@ function injectNavbar() {
 
   header.innerHTML = `
     <div class="nav-container">
-      <a href="index.html" class="nav-brand">MOSES<span style="color: var(--primary);">.OS</span></a>
+      <a href="/" class="nav-brand">MOSES<span style="color: var(--primary);">.OS</span></a>
       <button class="menu-toggle" aria-label="Toggle Menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
       <ul class="nav-menu">
-        <li><a href="index.html" class="nav-link" data-path="index.html">Home</a></li>
-        <li><a href="about.html" class="nav-link" data-path="about.html">About</a></li>
-        <li><a href="projects.html" class="nav-link" data-path="projects.html">Projects</a></li>
-        <li><a href="planner.html" class="nav-link" data-path="planner.html">Planner</a></li>
-        <li><a href="contact.html" class="nav-link" data-path="contact.html">Contact</a></li>
+        <li><a href="/" class="nav-link" data-path="/">Home</a></li>
+        <li><a href="/about/" class="nav-link" data-path="/about/">About</a></li>
+        <li><a href="/projects/" class="nav-link" data-path="/projects/">Projects</a></li>
+        <li><a href="/planner/" class="nav-link" data-path="/planner/">Planner</a></li>
+        <li><a href="/contact/" class="nav-link" data-path="/contact/">Contact</a></li>
       </ul>
     </div>
   `;
@@ -62,13 +62,17 @@ function injectFooter() {
 }
 
 function setActiveNavLink() {
-  const currentPath = window.location.pathname.split("/").pop() || "index.html";
+  const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll(".nav-link");
-
+  console.log("Current Path:", window.location);
   navLinks.forEach((link) => {
-    if (link.getAttribute("data-path") === currentPath) {
-      link.classList.add("active");
-    }
+    const linkPath = link.getAttribute("data-path");
+
+    const isActive =
+      currentPath === linkPath ||
+      (currentPath === "/" && linkPath === "index.html");
+
+    link.classList.toggle("active", isActive);
   });
 }
 
