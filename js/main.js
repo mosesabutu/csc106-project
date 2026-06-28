@@ -21,10 +21,10 @@ function injectNavbar() {
       </button>
       <ul class="nav-menu">
         <li><a href="/" class="nav-link" data-path="/">Home</a></li>
-        <li><a href="/about/" class="nav-link" data-path="/about/">About</a></li>
-        <li><a href="/projects/" class="nav-link" data-path="/project/">Projects</a></li>
-        <li><a href="/planner/" class="nav-link" data-path="/planner/">Planner</a></li>
-        <li><a href="/contact/" class="nav-link" data-path="/contact/">Contact</a></li>
+        <li><a href="/about" class="nav-link" data-path="/about">About</a></li>
+        <li><a href="/project" class="nav-link" data-path="/project">Projects</a></li>
+        <li><a href="/planner" class="nav-link" data-path="/planner">Planner</a></li>
+        <li><a href="/contact" class="nav-link" data-path="/contact">Contact</a></li>
       </ul>
     </div>
   `;
