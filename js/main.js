@@ -64,7 +64,6 @@ function injectFooter() {
 function setActiveNavLink() {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll(".nav-link");
-  console.log("Current Path:", window.location);
   navLinks.forEach((link) => {
     const linkPath = link.getAttribute("data-path");
 
